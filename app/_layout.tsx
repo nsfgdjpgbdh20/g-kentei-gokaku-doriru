@@ -37,14 +37,12 @@ export default function RootLayout() {
     return null;  
   }  
   
-  return (  
-    <NavigationContainer>  
-      <ErrorBoundary>  
-        <ThemeProvider>  
-          <RootLayoutNav />  
-        </ThemeProvider>  
-      </ErrorBoundary>  
-    </NavigationContainer>  
+  return (
+    <ErrorBoundary>
+      <ThemeProvider>
+        <RootLayoutNav />
+      </ThemeProvider>
+    </ErrorBoundary>
   );  
 }
 
