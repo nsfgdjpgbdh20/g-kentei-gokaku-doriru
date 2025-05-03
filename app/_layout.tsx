@@ -6,7 +6,6 @@ import { useEffect } from "react";
 import { Platform } from "react-native";  
 import { ThemeProvider } from "@/context/theme-context";  
 import { ErrorBoundary } from "./error-boundary";  
-import { NavigationContainer } from '@react-navigation/native';  
   
 export const unstable_settings = {  
   initialRouteName: "(tabs)",  
