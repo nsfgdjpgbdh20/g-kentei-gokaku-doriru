@@ -1,7 +1,7 @@
 import React from "react";
 import { Tabs } from "expo-router";
 import { useColorScheme, Platform, Dimensions } from "react-native";
-import { Home, BookOpen, Layers, Settings } from "lucide-react-native";
+import { MaterialIcons } from '@expo/vector-icons';
 import { useTheme } from "@/context/theme-context";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
@@ -59,7 +59,7 @@ export default function TabLayout() {
         name="index"
         options={{
           title: "ホーム",
-          tabBarIcon: ({ color }) => <Home size={getIconSize()} color={color} />,
+          tabBarIcon: ({ color }) => <MaterialIcons name="home" size={24} color={color} />,
           headerTitle: "G検定合格ドリル",
         }}
       />
@@ -68,14 +68,14 @@ export default function TabLayout() {
         options={{
           title: "クイズ",
           headerTitle: "クイズ",
-          tabBarIcon: ({ color }) => <BookOpen size={getIconSize()} color={color} />,
+          tabBarIcon: ({ color }) => <MaterialIcons name="menu-book" size={24} color={color} />,
         }}
       />
       <Tabs.Screen
         name="cards"
         options={{
           title: "カード",
-          tabBarIcon: ({ color }) => <Layers size={getIconSize()} color={color} />,
+          tabBarIcon: ({ color }) => <MaterialIcons name="layers" size={24} color={color} />,
           headerTitle: "フラッシュカード",
         }}
       />
@@ -83,7 +83,7 @@ export default function TabLayout() {
         name="settings"
         options={{
           title: "設定",
-          tabBarIcon: ({ color }) => <Settings size={getIconSize()} color={color} />,
+          tabBarIcon: ({ color }) => <MaterialIcons name="settings" size={24} color={color} />,
           headerTitle: "設定",
         }}
       />

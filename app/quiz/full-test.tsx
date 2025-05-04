@@ -16,17 +16,7 @@ import { router, useNavigation } from "expo-router";
 import { useTheme } from "@/context/theme-context";
 import { useQuestionStore } from "@/stores/question-store";
 import { useProgressStore } from "@/stores/progress-store";
-import { 
-  ArrowLeft, 
-  ArrowRight, 
-  Flag, 
-  Clock, 
-  CheckCircle, 
-  XCircle,
-  Save,
-  AlertTriangle,
-  X
-} from "lucide-react-native";
+import { MaterialIcons } from '@expo/vector-icons';
 import * as Haptics from "expo-haptics";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { Question } from "@/types/question";
@@ -404,7 +394,7 @@ export default function FullTestScreen() {
               onPress={handlePrevQuestion}
               disabled={currentIndex === 0}
             >
-              <ArrowLeft size={20} color={colors.text} />
+              <MaterialIcons name="arrow-back" size={24} color={colors.primary} />
               <Text style={[styles.navButtonText, { color: colors.text }]}>
                 前へ
               </Text>
@@ -428,7 +418,7 @@ export default function FullTestScreen() {
                 <Text style={[styles.navButtonText, { color: "#fff" }]}>
                   次へ
                 </Text>
-                <ArrowRight size={20} color="#fff" />
+                <MaterialIcons name="arrow-forward" size={24} color={colors.primary} />
               </TouchableOpacity>
             )}
           </View>

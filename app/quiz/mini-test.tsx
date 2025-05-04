@@ -14,7 +14,7 @@ import { router, useLocalSearchParams } from "expo-router";
 import { useTheme } from "@/context/theme-context";
 import { useQuestionStore } from "@/stores/question-store";
 import { useProgressStore } from "@/stores/progress-store";
-import { ArrowLeft, ArrowRight, Clock, X } from "lucide-react-native";
+import { MaterialIcons } from '@expo/vector-icons';
 import * as Haptics from "expo-haptics";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { Question } from "@/types/question";
@@ -177,7 +177,17 @@ export default function MiniTestScreen() {
     }, [] as { id: number; chapter: string; correct: boolean }[]);
 
     if (answeredResults.length > 0) {
-      updateProgress({ answeredQuestions: answeredResults });
+      updateProgress({
+        answeredQuestions: testQuestions
+          .map((q, i) => answers[i] !== null ? {
+            id: q.id,
+            chapter: q.chapter,
+            correct: answers[i] === q.answerIndex
+          } : null)
+          .filter(Boolean) as { id: number; chapter: string; correct: boolean }[],
+        miniTestCompleted: true,
+        testType: "mini"
+      });
     }
 
     if (timerRef.current) {
@@ -251,13 +261,13 @@ export default function MiniTestScreen() {
     
     // Update progress
     updateProgress({
-      answeredQuestions: [
-        {
-          id: testQuestions[currentIndex].id,
-          chapter: testQuestions[currentIndex].chapter,
-          correct: answers[currentIndex] === testQuestions[currentIndex].answerIndex
-        }
-      ]
+      answeredQuestions: testQuestions.map((q, i) => ({
+        id: q.id,
+        chapter: q.chapter,
+        correct: answers[i] === q.answerIndex
+      })),
+      miniTestCompleted: true,
+      testType: "mini"
     });
     
     const params = new URLSearchParams({
@@ -297,14 +307,11 @@ export default function MiniTestScreen() {
           style={styles.exitButton}
           onPress={handleBackPress}
         >
-          <X size={20} color={colors.text} />
+          <MaterialIcons name="close" size={24} color={colors.primary} />
         </TouchableOpacity>
         
         <View style={styles.timerContainer}>
-          <Clock 
-            size={20} 
-            color={isTimeWarning ? colors.error : colors.text} 
-          />
+          <MaterialIcons name="access-time" size={24} color={colors.primary} />
           <Text 
             style={[
               styles.timerText, 
@@ -351,7 +358,7 @@ export default function MiniTestScreen() {
           onPress={handlePrevQuestion}
           disabled={currentIndex === 0}
         >
-          <ArrowLeft size={20} color={colors.text} />
+          <MaterialIcons name="arrow-back" size={24} color={colors.primary} />
           <Text style={[styles.navButtonText, { color: colors.text }]}>前へ</Text>
         </TouchableOpacity>
         
@@ -368,7 +375,7 @@ export default function MiniTestScreen() {
             onPress={handleNextQuestion}
           >
             <Text style={[styles.navButtonText, { color: "#fff" }]}>次へ</Text>
-            <ArrowRight size={20} color="#fff" />
+            <MaterialIcons name="arrow-forward" size={24} color={colors.primary} />
           </TouchableOpacity>
         )}
       </View>

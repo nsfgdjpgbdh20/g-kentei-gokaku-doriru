@@ -5,7 +5,7 @@ import { useTheme } from "@/context/theme-context";
 import { useFlashcardStore } from "@/stores/flashcard-store";
 import { SafeAreaView, useSafeAreaInsets } from "react-native-safe-area-context";
 import { Flashcard } from "@/types/flashcard";
-import { X, Check } from "lucide-react-native";
+import { MaterialIcons } from '@expo/vector-icons';
 
 export default function StudyScreen() {
   const { chapter } = useLocalSearchParams<{ chapter: string }>();
@@ -135,7 +135,7 @@ export default function StudyScreen() {
           style={styles.exitButton}
           onPress={handleInterrupt}
         >
-          <X size={24} color={colors.text} />
+          <MaterialIcons name="close" size={24} color={colors.primary} />
         </TouchableOpacity>
       </View>
 
@@ -156,11 +156,11 @@ export default function StudyScreen() {
       </View>
       <View style={styles.responseButtons}>
         <TouchableOpacity style={[styles.responseButton, { backgroundColor: colors.error }]} onPress={() => handleResponse(1)}>
-          <X size={20} color="#fff" />
+          <MaterialIcons name="close" size={20} color="#fff" />
           <Text style={styles.responseButtonText}>忘れていた</Text>
         </TouchableOpacity>
         <TouchableOpacity style={[styles.responseButton, { backgroundColor: colors.success }]} onPress={() => handleResponse(5)}>
-          <Check size={20} color="#fff" />
+          <MaterialIcons name="check" size={20} color="#fff" />
           <Text style={styles.responseButtonText}>覚えていた</Text>
         </TouchableOpacity>
       </View>

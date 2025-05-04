@@ -1,7 +1,8 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { useTheme } from "@/context/theme-context";
-import { Calendar } from "lucide-react-native";
+import { MaterialIcons } from '@expo/vector-icons';
+// import { Calendar } from "lucide-react-native";
 
 interface MonthlyLearningProgressProps {
   currentDays: number;
@@ -24,7 +25,7 @@ export default function MonthlyLearningProgress({
     <View style={styles.container}>
       <View style={styles.headerRow}>
         <View style={styles.titleContainer}>
-          <Calendar size={18} color={colors.primary} />
+          <MaterialIcons name="calendar-today" size={18} color={colors.primary} />
           <Text style={[styles.title, { color: colors.text }]}>
             {currentMonth}の学習目標
           </Text>

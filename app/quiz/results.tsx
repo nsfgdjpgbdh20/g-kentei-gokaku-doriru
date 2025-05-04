@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import { router, useLocalSearchParams } from "expo-router";
 import { useTheme } from "@/context/theme-context";
-import { Award, Home, RefreshCw, CheckCircle, XCircle, Percent } from "lucide-react-native";
+import { MaterialIcons } from '@expo/vector-icons';
 import * as Haptics from "expo-haptics";
 import { LinearGradient } from "expo-linear-gradient";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -94,7 +94,7 @@ export default function ResultsScreen() {
             style={styles.scoreGradient}
           >
             <View style={styles.scoreCircle}>
-              <Award size={32} color={getScoreColor()} />
+              <MaterialIcons name="emoji-events" size={24} color={getScoreColor()} />
               <Text style={[styles.scoreText, { color: getScoreColor() }]}>
                 {score}%
               </Text>
@@ -108,7 +108,7 @@ export default function ResultsScreen() {
         <View style={styles.statsContainer}>
           <View style={[styles.statCard, { backgroundColor: colors.card }]}>
             <View style={styles.statItem}>
-              <CheckCircle size={20} color={colors.success} />
+              <MaterialIcons name="check-circle" size={24} color={colors.success} />
               <Text style={[styles.statValue, { color: colors.text }]}>
                 {correct}
               </Text>
@@ -118,7 +118,7 @@ export default function ResultsScreen() {
             </View>
             
             <View style={styles.statItem}>
-              <XCircle size={20} color={colors.error} />
+              <MaterialIcons name="cancel" size={24} color={colors.error} />
               <Text style={[styles.statValue, { color: colors.text }]}>
                 {totalNum - correctNum}
               </Text>
@@ -128,7 +128,7 @@ export default function ResultsScreen() {
             </View>
             
             <View style={styles.statItem}>
-              <Percent size={20} color={colors.textSecondary} />
+              <MaterialIcons name="percent" size={24} color={colors.primary} />
               <Text style={[styles.statValue, { color: colors.text }]}>
                 {answered}/{total}
               </Text>
@@ -159,7 +159,7 @@ export default function ResultsScreen() {
             style={[styles.actionButton, { backgroundColor: colors.primary }]}
             onPress={handleGoHome}
           >
-            <Home size={20} color="#fff" />
+            <MaterialIcons name="home" size={24} color="#fff" />
             <Text style={styles.actionButtonText}>
               ホームに戻る
             </Text>

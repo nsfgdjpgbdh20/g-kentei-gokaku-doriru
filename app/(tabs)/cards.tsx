@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, TouchableOpacity, ScrollView, SafeAreaView } fr
 import { router, useFocusEffect } from "expo-router";
 import { useTheme } from "@/context/theme-context";
 import { useFlashcardStore } from "@/stores/flashcard-store";
-import { Layers, Clock, CheckCircle, XCircle, Info } from "lucide-react-native";
+import { MaterialIcons } from '@expo/vector-icons';
 import * as Haptics from "expo-haptics";
 import { Platform } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -105,7 +105,7 @@ export default function CardsScreen() {
           <View style={{ backgroundColor: colors.card, borderRadius: 16, flexDirection: 'row', alignItems: 'stretch', shadowColor: '#000', shadowOffset: { width: 0, height: 2 }, shadowOpacity: 0.08, shadowRadius: 8, elevation: 2 }}>
             {/* 総カード数 */}
             <View style={{ flex: 1, alignItems: 'center', paddingVertical: 16 }}>
-              <Layers size={28} color={colors.primary} />
+              <MaterialIcons name="layers" size={28} color={colors.primary} />
               <Text style={{ fontSize: 14, fontWeight: 'bold', color: colors.primary, marginTop: 8 }}>総カード数</Text>
               <Text style={{ fontSize: 28, fontWeight: 'bold', color: colors.text, marginTop: 2 }}>{totalCount}</Text>
             </View>
@@ -113,7 +113,7 @@ export default function CardsScreen() {
             <View style={{ width: 1, backgroundColor: colors.border, marginVertical: 16 }} />
             {/* 習得済み */}
             <View style={{ flex: 1, alignItems: 'center', paddingVertical: 16 }}>
-              <CheckCircle size={28} color={colors.success} />
+              <MaterialIcons name="check-circle" size={28} color={colors.success} />
               <Text style={{ fontSize: 14, fontWeight: 'bold', color: colors.success, marginTop: 8 }}>習得済み</Text>
               <Text style={{ fontSize: 28, fontWeight: 'bold', color: colors.text, marginTop: 2 }}>{masteredCount}</Text>
             </View>
@@ -121,7 +121,7 @@ export default function CardsScreen() {
             <View style={{ width: 1, backgroundColor: colors.border, marginVertical: 16 }} />
             {/* 未習得 */}
             <View style={{ flex: 1, alignItems: 'center', paddingVertical: 16 }}>
-              <XCircle size={28} color={colors.error} />
+              <MaterialIcons name="cancel" size={28} color={colors.error} />
               <Text style={{ fontSize: 14, fontWeight: 'bold', color: colors.error, marginTop: 8 }}>未習得</Text>
               <Text style={{ fontSize: 28, fontWeight: 'bold', color: colors.text, marginTop: 2 }}>{unmasteredCount}</Text>
             </View>
@@ -180,7 +180,7 @@ export default function CardsScreen() {
         
         {!hasCardsToStudy && (
           <View style={[styles.emptyStateCard, { backgroundColor: colors.card }]}>
-            <Info size={24} color={colors.textSecondary} />
+            <MaterialIcons name="info" size={24} color={colors.primary} />
             <Text style={[styles.emptyStateTitle, { color: colors.text }]}>
               学習予定のカードがありません
             </Text>
@@ -197,7 +197,7 @@ export default function CardsScreen() {
             style={[styles.startButton, { backgroundColor: colors.primary, marginBottom: 0 }]}
             onPress={handleStartFlashcards}
           >
-            <Layers size={20} color="#fff" />
+            <MaterialIcons name="layers" size={20} color="#fff" />
             <Text style={styles.startButtonText}>
               {numberOfCardsForButton}枚のカードを学習する
             </Text>

@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import { useTheme } from "@/context/theme-context";
-import { ArrowLeft } from "lucide-react-native";
+// import { ArrowLeft } from "lucide-react-native";
 import { useSafeAreaInsets, SafeAreaView } from "react-native-safe-area-context";
 import { useRouter } from "expo-router";
 
@@ -23,7 +23,7 @@ const CommonHeader: React.FC<CommonHeaderProps> = ({ title, showBackButton = fal
       <View style={[styles.header, { paddingTop: insets.top, backgroundColor: colors.background }]}> 
         {showBackButton && (
           <TouchableOpacity style={styles.backButton} onPress={onBack || (() => router.back())}>
-            <ArrowLeft size={24} color={colors.text} />
+            {/* <ArrowLeft size={24} color={colors.text} /> */}
           </TouchableOpacity>
         )}
         <Text style={[styles.title, { color: colors.text }]}>{title}</Text>

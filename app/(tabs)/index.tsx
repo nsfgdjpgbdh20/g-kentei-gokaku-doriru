@@ -6,7 +6,7 @@ import { useProgressStore } from "@/stores/progress-store";
 import { useQuestionStore } from "@/stores/question-store";
 import { useNotificationStore } from "@/stores/notification-store";
 import { LinearGradient } from "expo-linear-gradient";
-import { Clock, Award, BookOpen, Layers, TrendingUp, Calendar, Check } from "lucide-react-native";
+import { MaterialIcons } from '@expo/vector-icons';
 import * as Haptics from "expo-haptics";
 import ProgressBar from "@/components/ProgressBar";
 import MonthlyLearningProgress from "@/components/MonthlyLearningProgress";
@@ -138,7 +138,7 @@ export default function HomeScreen() {
             <View style={[styles.taskItem, { backgroundColor: colors.card }, getTodayStudiedCount() >= 10 && { backgroundColor: colors.success + '22' }]}> 
               <View style={[styles.taskCheckCircle, getTodayStudiedCount() >= 10 && { borderColor: colors.success, backgroundColor: colors.success }]}> 
                 {getTodayStudiedCount() >= 10 ? (
-                  <Check size={16} color="#fff" />
+                  <MaterialIcons name="check" size={24} color={colors.primary} />
                 ) : null}
               </View>
               <Text style={[styles.taskText, { color: colors.text }, getTodayStudiedCount() >= 10 && { color: colors.success }]}>フラッシュカードを10枚学習 <Text style={[styles.taskProgress, { color: colors.textSecondary }]}>（{getTodayStudiedCount()}/10）</Text></Text>
@@ -147,7 +147,7 @@ export default function HomeScreen() {
             <View style={[styles.taskItem, { backgroundColor: colors.card }, todayAnsweredCount >= 10 && { backgroundColor: colors.success + '22' }]}> 
               <View style={[styles.taskCheckCircle, todayAnsweredCount >= 10 && { borderColor: colors.success, backgroundColor: colors.success }]}> 
                 {todayAnsweredCount >= 10 ? (
-                  <Check size={16} color="#fff" />
+                  <MaterialIcons name="check" size={24} color={colors.primary} />
                 ) : null}
               </View>
               <Text style={[styles.taskText, { color: colors.text }, todayAnsweredCount >= 10 && { color: colors.success }]}>クイズを10問解く <Text style={[styles.taskProgress, { color: colors.textSecondary }]}>（{todayAnsweredCount}/10）</Text></Text>
@@ -167,7 +167,7 @@ export default function HomeScreen() {
                 router.push('/(tabs)/quiz');
               }}
             >
-              <BookOpen size={24} color={colors.primary} />
+              <MaterialIcons name="menu-book" size={24} color={colors.primary} />
               <Text style={[styles.actionText, { color: colors.text }]}>クイズ</Text>
               <Text style={[styles.actionSubtext, { color: colors.textSecondary }]}>設問形式で学習</Text>
             </TouchableOpacity>
@@ -180,7 +180,7 @@ export default function HomeScreen() {
                 router.push('/(tabs)/cards');
               }}
             >
-              <Layers size={24} color={colors.primary} />
+              <MaterialIcons name="layers" size={24} color={colors.primary} />
               <Text style={[styles.actionText, { color: colors.text }]}>フラッシュカード</Text>
               <Text style={[styles.actionSubtext, { color: colors.textSecondary }]}>重要用語の暗記</Text>
             </TouchableOpacity>

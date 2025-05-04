@@ -16,17 +16,7 @@ import { useNotificationStore } from "@/stores/notification-store";
 import { useProgressStore } from "@/stores/progress-store";
 import { useQuestionStore } from "@/stores/question-store";
 import { useFlashcardStore } from "@/stores/flashcard-store";
-import { 
-  Settings, 
-  Bell, 
-  Moon, 
-  Sun, 
-  Trash2, 
-  RefreshCw, 
-  Info, 
-  ExternalLink,
-  Clock
-} from "lucide-react-native";
+import { MaterialIcons } from '@expo/vector-icons';
 import * as Haptics from "expo-haptics";
 import DateTimePicker from "@/components/DateTimePicker";
 import { scheduleNotification, cancelAllNotifications } from "@/utils/notifications";
@@ -153,9 +143,9 @@ export default function SettingsScreen() {
             >
               <View style={styles.settingIconContainer}>
                 {theme === "dark" ? (
-                  <Moon size={22} color={colors.primary} />
+                  <MaterialIcons name="dark-mode" size={24} color={colors.primary} />
                 ) : (
-                  <Sun size={22} color={colors.primary} />
+                  <MaterialIcons name="light-mode" size={24} color={colors.primary} />
                 )}
               </View>
               <View style={styles.settingTextContainer}>
@@ -181,7 +171,7 @@ export default function SettingsScreen() {
               onPress={handleToggleNotifications}
             >
               <View style={styles.settingIconContainer}>
-                <Bell size={22} color={colors.primary} />
+                <MaterialIcons name="notifications" size={24} color={colors.primary} />
               </View>
               <View style={styles.settingTextContainer}>
                 <Text style={[styles.settingLabel, { color: colors.text }]}>
@@ -208,7 +198,7 @@ export default function SettingsScreen() {
                   onPress={() => setShowTimePicker(true)}
                 >
                   <View style={styles.settingIconContainer}>
-                    <Clock size={22} color={colors.primary} />
+                    <MaterialIcons name="access-time" size={24} color={colors.primary} />
                   </View>
                   <View style={styles.settingTextContainer}>
                     <Text style={[styles.settingLabel, { color: colors.text }]}>
@@ -244,7 +234,7 @@ export default function SettingsScreen() {
               disabled={isUpdating}
             >
               <View style={styles.settingIconContainer}>
-                <RefreshCw size={22} color={colors.primary} />
+                <MaterialIcons name="refresh" size={24} color={colors.primary} />
               </View>
               <View style={styles.settingTextContainer}>
                 <Text style={[styles.settingLabel, { color: colors.text }]}>
@@ -263,7 +253,7 @@ export default function SettingsScreen() {
               onPress={handleResetProgress}
             >
               <View style={styles.settingIconContainer}>
-                <Trash2 size={22} color={colors.error} />
+                <MaterialIcons name="delete" size={24} color={colors.error} />
               </View>
               <View style={styles.settingTextContainer}>
                 <Text style={[styles.settingLabel, { color: colors.text }]}>
@@ -285,7 +275,7 @@ export default function SettingsScreen() {
           <View style={[styles.settingCard, { backgroundColor: colors.card }]}>
             <View style={styles.settingRow}>
               <View style={styles.settingIconContainer}>
-                <Info size={22} color={colors.primary} />
+                <MaterialIcons name="info" size={24} color={colors.primary} />
               </View>
               <View style={styles.settingTextContainer}>
                 <Text style={[styles.settingLabel, { color: colors.text }]}>
@@ -304,7 +294,7 @@ export default function SettingsScreen() {
               onPress={() => handleOpenWebsite("https://jdla.org/certificate/general/")}
             >
               <View style={styles.settingIconContainer}>
-                <ExternalLink size={22} color={colors.primary} />
+                <MaterialIcons name="open-in-new" size={24} color={colors.primary} />
               </View>
               <View style={styles.settingTextContainer}>
                 <Text style={[styles.settingLabel, { color: colors.text }]}>

@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
-import { X, Clock } from "lucide-react-native";
 import { EdgeInsets } from "react-native-safe-area-context";
+import { MaterialIcons } from '@expo/vector-icons';
 
 interface QuizHeaderProps {
   onExit: () => void;
@@ -31,10 +31,10 @@ const QuizHeader: React.FC<QuizHeaderProps> = ({
   return (
     <View style={[styles.header, { paddingTop: Math.max(insets.top, 10) }]}> 
       <TouchableOpacity style={styles.exitButton} onPress={onExit}>
-        <X size={20} color={colors.text} />
+        <MaterialIcons name="close" size={20} color={colors.text} />
       </TouchableOpacity>
       <View style={styles.timerContainer}>
-        <Clock size={20} color={isTimeWarning ? colors.error : colors.text} />
+        <MaterialIcons name="access-time" size={20} color={isTimeWarning ? colors.error : colors.text} />
         <Text style={[
           styles.timerText,
           { color: isTimeWarning ? colors.error : colors.text }

@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from "react-native";
 import { useTheme } from "@/context/theme-context";
 import { Question } from "@/types/question";
-import { CheckCircle, XCircle } from "lucide-react-native";
+import { MaterialIcons } from '@expo/vector-icons';
+// import { CheckCircle, XCircle } from "lucide-react-native";
 
 interface QuestionViewProps {
   question: Question;
@@ -71,11 +72,11 @@ export default function QuestionView({
                   </Text>
                   
                   {(feedbackStatus === 'correct' && isSelected) || (feedbackStatus === 'incorrect' && isCorrectAnswer) ? (
-                    <CheckCircle size={20} color={colors.success} />
+                    <MaterialIcons name="check-circle" size={20} color={colors.success} />
                   ) : null}
                   
                   {feedbackStatus === 'incorrect' && isSelected ? (
-                    <XCircle size={20} color={colors.error} />
+                    <MaterialIcons name="cancel" size={20} color={colors.error} />
                   ) : null}
                 </View>
               </TouchableOpacity>

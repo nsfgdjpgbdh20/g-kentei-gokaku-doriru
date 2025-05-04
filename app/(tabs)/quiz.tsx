@@ -4,7 +4,7 @@ import { router } from "expo-router";
 import { useTheme } from "@/context/theme-context";
 import { useQuestionStore } from "@/stores/question-store";
 import { useProgressStore } from "@/stores/progress-store";
-import { Layers, CheckCircle, XCircle, Info } from "lucide-react-native";
+import { MaterialIcons } from '@expo/vector-icons';
 import * as Haptics from "expo-haptics";
 import { Platform } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -75,19 +75,19 @@ export default function QuizScreen() {
         <View style={{ marginBottom: 24 }}>
           <View style={{ backgroundColor: colors.card, borderRadius: 16, flexDirection: 'row', alignItems: 'stretch', shadowColor: '#000', shadowOffset: { width: 0, height: 2 }, shadowOpacity: 0.08, shadowRadius: 8, elevation: 2 }}>
             <View style={{ flex: 1, alignItems: 'center', paddingVertical: 16 }}>
-              <Layers size={28} color={colors.primary} />
+              <MaterialIcons name="layers" size={28} color={colors.primary} />
               <Text style={{ fontSize: 14, fontWeight: 'bold', color: colors.primary, marginTop: 8 }}>総クイズ数</Text>
               <Text style={{ fontSize: 28, fontWeight: 'bold', color: colors.text, marginTop: 2 }}>{totalCount}</Text>
             </View>
             <View style={{ width: 1, backgroundColor: colors.border, marginVertical: 16 }} />
             <View style={{ flex: 1, alignItems: 'center', paddingVertical: 16 }}>
-              <CheckCircle size={28} color={colors.success} />
+              <MaterialIcons name="check-circle" size={28} color={colors.success} />
               <Text style={{ fontSize: 14, fontWeight: 'bold', color: colors.success, marginTop: 8 }}>習得済み</Text>
               <Text style={{ fontSize: 28, fontWeight: 'bold', color: colors.text, marginTop: 2 }}>{masteredCount}</Text>
             </View>
             <View style={{ width: 1, backgroundColor: colors.border, marginVertical: 16 }} />
             <View style={{ flex: 1, alignItems: 'center', paddingVertical: 16 }}>
-              <XCircle size={28} color={colors.error} />
+              <MaterialIcons name="cancel" size={28} color={colors.error} />
               <Text style={{ fontSize: 14, fontWeight: 'bold', color: colors.error, marginTop: 8 }}>未習得</Text>
               <Text style={{ fontSize: 28, fontWeight: 'bold', color: colors.text, marginTop: 2 }}>{unmasteredCount}</Text>
             </View>
@@ -150,7 +150,7 @@ export default function QuizScreen() {
           style={[styles.startButton, { backgroundColor: colors.primary, marginBottom: 0 }]}
           onPress={handleStartMiniTest}
         >
-          <Layers size={20} color="#fff" />
+          <MaterialIcons name="layers" size={20} color="#fff" />
           <Text style={styles.startButtonText}>
             {(() => {
               if (selectedQuizChapter === null) {

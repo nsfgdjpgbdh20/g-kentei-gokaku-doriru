@@ -71,41 +71,39 @@ export const useProgressStore = create<ProgressState>()(
           updates.lastScore = lastScore;
         }
         
-        if (testCompleted || miniTestCompleted) {
-          const newTestHistory = [...state.testHistory];
-          const newTestResult: TestResult = {
+        if ((testCompleted || miniTestCompleted) && answeredQuestions && answeredQuestions.length > 0) {
+          const newTest = {
             date: today,
+            type: testType || (miniTestCompleted ? 'mini' : 'full'),
             score: lastScore ?? 0,
-            type: testType || 'mini',
-            chapterScores: chapterScores || {},
-            answeredCount: answeredQuestions ? answeredQuestions.length : 0
+            answeredCount: answeredQuestions.length,
+            chapterScores: chapterScores ?? {},
           };
-          newTestHistory.push(newTestResult);
-          if (newTestHistory.length > 10) newTestHistory.shift();
-          updates.testHistory = newTestHistory;
+          updates.testHistory = [...state.testHistory, newTest];
 
-          if (answeredQuestions && answeredQuestions.length > 0) {
-            const newChapterProgress = { ...state.chapterProgress };
-            const chapterQuestions: Record<string, AnsweredQuestion[]> = {};
-            answeredQuestions.forEach(q => {
-              if (!chapterQuestions[q.chapter]) chapterQuestions[q.chapter] = [];
-              chapterQuestions[q.chapter].push(q);
-            });
-            Object.entries(chapterQuestions).forEach(([chapter, questions]) => {
-              const correctCount = questions.filter(q => q.correct).length;
-              const totalCount = questions.length;
-              const chapterScore = Math.round((correctCount / totalCount) * 100);
-              newChapterProgress[chapter] = chapterScore;
-            });
-            updates.chapterProgress = newChapterProgress;
+          // --- 分野別進捗(chapterProgress)の計算 ---
+          const newChapterProgress = { ...state.chapterProgress };
+          const chapterQuestions: Record<string, AnsweredQuestion[]> = {};
+          answeredQuestions.forEach(q => {
+            if (!chapterQuestions[q.chapter]) chapterQuestions[q.chapter] = [];
+            chapterQuestions[q.chapter].push(q);
+          });
+          Object.entries(chapterQuestions).forEach(([chapter, questions]) => {
+            const correctCount = questions.filter(q => q.correct).length;
+            const totalCount = questions.length;
+            const chapterScore = Math.round((correctCount / totalCount) * 100);
+            newChapterProgress[chapter] = chapterScore;
+          });
+          updates.chapterProgress = newChapterProgress;
 
-            const chapters = Object.keys(newChapterProgress);
-            if (chapters.length > 0) {
-              const totalProgress = chapters.reduce((sum, chapter) => sum + newChapterProgress[chapter], 0);
-              updates.progress = Math.round(totalProgress / chapters.length);
-            }
+          // --- 全体進捗(progress)の計算 ---
+          const chapters = Object.keys(newChapterProgress);
+          if (chapters.length > 0) {
+            const totalProgress = chapters.reduce((sum, chapter) => sum + newChapterProgress[chapter], 0);
+            updates.progress = Math.round(totalProgress / chapters.length);
           }
-          
+
+          // --- 月間学習日数・最終学習日 ---
           if (state.lastStudyDate !== today) {
             updates.monthlyLearningDays = state.monthlyLearningDays + 1;
             updates.lastStudyDate = today;
