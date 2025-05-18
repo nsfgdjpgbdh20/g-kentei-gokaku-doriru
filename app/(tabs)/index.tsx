@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Alert, Platform, SafeAreaView } from "react-native";
 import { router } from "expo-router";
 import { useTheme } from "@/context/theme-context";
@@ -17,6 +17,11 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import CommonHeader from "../../components/CommonHeader";
 import { useFlashcardStore } from "@/stores/flashcard-store";
 import Svg, { Circle, Path, Text as SvgText } from "react-native-svg";
+import ReviewModal from "../../components/ReviewModal";
+import * as StoreReview from 'expo-store-review';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+const REVIEW_SHOWN_KEY = 'review-shown-date';
 
 export default function HomeScreen() {
   const { colors } = useTheme();
@@ -53,6 +58,37 @@ export default function HomeScreen() {
   };
   const masteryRate = calculateMasteryRate();
   
+  const [reviewVisible, setReviewVisible] = useState(false);
+  const reviewShownRef = useRef(false);
+
+  useEffect(() => {
+    const checkAndShowReview = async () => {
+      const shownDate = await AsyncStorage.getItem(REVIEW_SHOWN_KEY);
+      const quizDone = todayAnsweredCount >= 10;
+      const cardDone = getTodayStudiedCount() >= 10;
+      if (quizDone && cardDone && shownDate !== today) {
+        setTimeout(() => {
+          setReviewVisible(true);
+          AsyncStorage.setItem(REVIEW_SHOWN_KEY, today);
+        }, 800);
+      }
+    };
+    checkAndShowReview();
+  }, [todayAnsweredCount, studiedToday]);
+
+  // レビュー送信時の処理
+  const handleReviewSubmit = async (rating: number, comment: string) => {
+    if (rating >= 4) {
+      if (await StoreReview.isAvailableAsync()) {
+        StoreReview.requestReview();
+      } else {
+        Alert.alert('レビュー投稿', 'App Storeレビュー画面を開けませんでした。');
+      }
+    } else {
+      Alert.alert('ご意見ありがとうございました', 'ご意見は今後の参考にさせていただきます。');
+    }
+  };
+
   useEffect(() => {
     // Load questions on first launch
     loadQuestions();
@@ -187,6 +223,11 @@ export default function HomeScreen() {
           </View>
         </View>
       </ScrollView>
+      <ReviewModal
+        visible={reviewVisible}
+        onClose={() => setReviewVisible(false)}
+        onSubmit={handleReviewSubmit}
+      />
     </SafeAreaView>
   );
 }
